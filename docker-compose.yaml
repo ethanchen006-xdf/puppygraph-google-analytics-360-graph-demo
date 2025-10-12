@@ -2,18 +2,19 @@ version: "3"
 
 services:
   puppygraph:
-    image: puppygraph/puppygraph:stable
-    pull_policy: always
+    # If Dockerfile and .jar are in the same directory as docker-compose.yml
+    build: . # The dot signifies the current directory
     container_name: puppygraph
     environment:
       - PUPPYGRAPH_USERNAME=puppygraph
       - PUPPYGRAPH_PASSWORD=puppygraph123
     networks:
-      mysql_net:
+      - mysql_net
     ports:
       - "8081:8081"
       - "8182:8182"
       - "7687:7687"
+
   mysql:
     image: mysql:8.0.33
     container_name: mysql-server
@@ -21,11 +22,19 @@ services:
       - MYSQL_ROOT_PASSWORD=mysql123
       - MYSQL_USER=mysqluser
       - MYSQL_PASSWORD=mysqlpassword
-      - MYSQL_DATABASE=mydatabase
+      - MYSQL_DATABASE=government
+      - MYSQL_DEFAULT_AUTHENTICATION_PLUGIN=mysql_native_password
     networks:
       - mysql_net
     ports:
       - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password --local-infile=1 --secure-file-priv=/var/lib/mysql-files --explicit_defaults_for_timestamp=ON
+    volumes:
+      - mysql_data:/var/lib/mysql
+
 networks:
   mysql_net:
     name: puppy-mysql
+
+volumes:
+  mysql_data:
