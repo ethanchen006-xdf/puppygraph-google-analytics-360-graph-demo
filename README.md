@@ -28,7 +28,9 @@ docker cp ~/data/sample_data.csv mysql-server:/var/lib/mysql-files/sample_data.c
  2b. Execute sql script to create database, table, and load data
 ```bash
 docker exec -i mysql-server mysql -uroot -pmysql123
+```
 -- Database Management
+``` bash
 CREATE DATABASE journey;
 USE journey;
 ```
