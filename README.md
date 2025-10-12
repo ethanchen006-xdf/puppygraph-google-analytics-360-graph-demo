@@ -19,13 +19,6 @@ docker run -p 8081:8081 -p 8182:8182 -p 7687:7687 -e PUPPYGRAPH_PASSWORD=puppygr
 docker compose up -d
 ```
 
-# --- 2. Copy Data ---
-
-# Copy the CSV file to the MySQL container's secure directory
-```bash
-docker cp ~/Downloads/sample_data.csv mysql-server:/var/lib/mysql-files/sample_data.csv
-```
-
 ---
 
 ## 2. Copy Data and Create/Load Schema (Execute Inside MySQL Shell)
