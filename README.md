@@ -1,12 +1,11 @@
 # PuppyGraph Demo Setup: Copy-Paste Script
 
 ## Prerequisites
-- Docker and Docker Compose installed.
-- `docker-compose.yml` in the current directory.
-- Data file at `~/Downloads/sample_data.csv`.
+- `docker-compose.yaml` in the current directory.
+- Data file at `~/Downloads/sample_data.csv`. (adjust accordingly)
 - SQL files (`hit_tables.sql`, `nodes.sql`, `edges.sql`) in the current directory.
 - Assumed MySQL Root Password: `mysql123`
-- Assumed MySQL Database Name: `my_demo_db`
+- Assumed MySQL Database Name: `journey`
 
 ---
 
