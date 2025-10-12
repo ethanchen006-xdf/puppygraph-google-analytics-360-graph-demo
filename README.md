@@ -12,10 +12,7 @@
 ```bash
 # --- 1. Launch Containers ---
 
-# Launch PuppyGraph container
-docker run -p 8081:8081 -p 8182:8182 -p 7687:7687 -e PUPPYGRAPH_PASSWORD=puppygraph123 -e QUERY_TIMEOUT=5m -d --name puppy --rm --pull=always puppygraph/puppygraph:stable
-
-# Launch MySQL container defined in docker-compose.yml
+# Launch PuppyGraph and MySQL container defined in docker-compose.yml
 docker compose up -d
 ```
 
