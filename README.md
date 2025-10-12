@@ -10,8 +10,6 @@
 ---
 
 ```bash
-#!/bin/bash
-
 # --- 1. Launch Containers ---
 
 # Launch PuppyGraph container
