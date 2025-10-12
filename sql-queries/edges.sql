@@ -41,7 +41,7 @@ FROM
             country,
             time AS time_stamp
         FROM
-            hit_data
+            sample_data
         WHERE
             page_path IS NOT NULL
         UNION ALL
@@ -58,7 +58,7 @@ FROM
             country,
             time AS time_stamp
         FROM
-            hit_data
+            sample_data
         WHERE
             is_entrance = 'true'
     ) AS CombinedEdges
