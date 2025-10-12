@@ -25,7 +25,7 @@ docker compose up -d
 
  2a. Copy the CSV file to the MySQL container's secure directory
 ```bash
-docker cp ~/Downloads/sample_data.csv mysql-server:/var/lib/mysql-files/sample_data.csv
+docker cp ~/data/sample_data.csv mysql-server:/var/lib/mysql-files/sample_data.csv
 ```
 
  2b. Execute sql script to create database, table, and load data
