@@ -91,14 +91,10 @@ IGNORE 1 ROWS;
 ## 3. Run Preparatory SQL Files (Derive Graph Tables)
 
 ```bash
-# Execute the hit_tables.sql file
-docker exec -i mysql-server mysql -uroot -pmysql123 journey < hit_tables.sql
+docker exec -i mysql-server mysql -uroot -pmysql123 journey < ~/sql-queries/hit_tables.sql
+docker exec -i mysql-server mysql -uroot -pmysql123 journey < ~/sql-queries/nodes.sql
+docker exec -i mysql-server mysql -uroot -pmysql123 journey < ~/sql-queries/edges.sql
 
-# Execute the nodes.sql file
-docker exec -i mysql-server mysql -uroot -pmysql123 journey < nodes.sql
-
-# Execute the edges.sql file
-docker exec -i mysql-server mysql -uroot -pmysql123 journey < edges.sql
 ```
 
 ---
