@@ -1,19 +1,37 @@
-start docker in terminal
+# PuppyGraph Demo Setup: Copy-Paste Script
 
-docker run -p 8081:8081 -p 8182:8182 -p 7687:7687 -e PUPPYGRAPH_PASSWORD=puppygraph123  -e QUERY_TIMEOUT=5m -d --name puppy --rm --pull=always puppygraph/puppygraph:stable
+## Prerequisites
+- Docker and Docker Compose installed.
+- `docker-compose.yml` in the current directory.
+- Data file at `~/Downloads/sample_data.csv`.
+- SQL files (`hit_tables.sql`, `nodes.sql`, `edges.sql`) in the current directory.
+- Assumed MySQL Root Password: `mysql123`
+- Assumed MySQL Database Name: `my_demo_db`
 
+---
+
+## 1. Launch Containers (PuppyGraph & MySQL)
+
+# Launch PuppyGraph container
+docker run -p 8081:8081 -p 8182:8182 -p 7687:7687 -e PUPPYGRAPH_PASSWORD=puppygraph123 -e QUERY_TIMEOUT=5m -d --name puppy --rm --pull=always puppygraph/puppygraph:stable
+
+# Launch MySQL container defined in docker-compose.yml
 docker compose up -d
 
-docker exec -it mysql-server mysql -uroot -p
+---
 
-Input the root password (default root password: mysql123) of mysql-server to access the MySQL client shell.
+## 2. Copy Data and Create/Load Schema (Execute Inside MySQL Shell)
 
-Copy sample_data.csv to docker through terminal
-
+# 2a. Copy the CSV file to the MySQL container's secure directory
 docker cp ~/Downloads/sample_data.csv mysql-server:/var/lib/mysql-files/sample_data.csv
 
-create database
-use database
+# 2b. Execute a multi-line script to create database, table, and load data
+docker exec -i mysql-server mysql -uroot -pmysql123 <<EOF
+-- Database Management
+CREATE DATABASE my_demo_db;
+USE my_demo_db;
+
+-- Table Creation (as provided)
 CREATE TABLE sample_data (
     visitId bigint,
     visitNumber int,
@@ -49,9 +67,9 @@ CREATE TABLE sample_data (
     event_label varchar(255),
     product_names text,
     product_skus text
-); 
+);
 
-
+-- Data Loading
 LOAD DATA INFILE '/var/lib/mysql-files/sample_data.csv'
 INTO TABLE sample_data
 FIELDS TERMINATED BY ','
@@ -59,40 +77,52 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-run the attached sql queries in workbench or terminal
-hit_tables.sql first
-then nodes.sql and edges.sql
+EOF
 
-then go into puppygraph through localhost
-username puppygraph
-password puppygraph123
+---
 
-select create schema
-use mysql8
+## 3. Run Preparatory SQL Files (Derive Graph Tables)
 
-name the catalog anything;
-(from the docker yaml file)
-username: mysqluser
-password: mysqlpassword 
-jdbc connection string: jdbc:mariadb://mysql:3306
+# Execute the hit_tables.sql file
+docker exec -i mysql-server mysql -uroot -pmysql123 my_demo_db < hit_tables.sql
 
-save and submit
+# Execute the nodes.sql file
+docker exec -i mysql-server mysql -uroot -pmysql123 my_demo_db < nodes.sql
 
+# Execute the edges.sql file
+docker exec -i mysql-server mysql -uroot -pmysql123 my_demo_db < edges.sql
 
-then,
-add node from database 
-from table nodes
-and add node
+---
 
-add edge from database
-from table edges
-from key source_node_id
-to key target_node_id
+## 4. PuppyGraph Configuration Steps (Manual Web UI)
 
-then submit
+1.  **Access UI:** Go to **`http://localhost:8081`**.
+    * **Username:** `puppygraph`
+    * **Password:** `puppygraph123`
 
-then you can copy my demo gremlin queries
+2.  **Create Schema/Catalog:**
+    * Click **"Create Schema"**.
+    * **Engine:** `mysql8`
+    * **Name:** *[Any name]*
+    * **Username:** `mysqluser`
+    * **Password:** `mysqlpassword`
+    * **JDBC Connection String:** `jdbc:mariadb://mysql:3306`
+    * Click **Save and Submit**.
 
+3.  **Add Nodes:**
+    * Click **"Add Node from Database"**.
+    * Select table **`nodes`**.
+    * Click **"Add Node"**.
 
+4.  **Add Edges:**
+    * Click **"Add Edge from Database"**.
+    * Select table **`edges`**.
+    * **From Key:** `source_node_id`
+    * **To Key:** `target_node_id`
+    * Click **Submit**.
 
+---
 
+## 5. Run Demo Queries
+
+Proceed to the PuppyGraph Query Editor to run your demo Gremlin queries.
