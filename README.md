@@ -92,13 +92,13 @@ IGNORE 1 ROWS;
 
 ```bash
 # Execute the hit_tables.sql file
-docker exec -i mysql-server mysql -uroot -pmysql123 my_demo_db < hit_tables.sql
+docker exec -i mysql-server mysql -uroot -pmysql123 journey < hit_tables.sql
 
 # Execute the nodes.sql file
-docker exec -i mysql-server mysql -uroot -pmysql123 my_demo_db < nodes.sql
+docker exec -i mysql-server mysql -uroot -pmysql123 journey < nodes.sql
 
 # Execute the edges.sql file
-docker exec -i mysql-server mysql -uroot -pmysql123 my_demo_db < edges.sql
+docker exec -i mysql-server mysql -uroot -pmysql123 journey < edges.sql
 ```
 
 ---
