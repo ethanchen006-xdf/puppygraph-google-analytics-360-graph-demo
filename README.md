@@ -1,9 +1,9 @@
 # PuppyGraph Demo GA360 Analytics
 
 ## Prerequisites
-- `~/docker-compose.yaml` in the current directory.
-- Data file at `~/data/sample_data.csv`. (adjust accordingly)
-- SQL files (`~/sql-queries/hit_tables.sql`, `~/sql-queries/nodes.sql`, `~/sql-queries/edges.sql`) in the current directory.
+- `~/docker-compose.yaml`
+- Data file at `~/data/sample_data.csv`
+- SQL files (`~/sql-queries/hit_tables.sql`, `~/sql-queries/nodes.sql`, `~/sql-queries/edges.sql`
 - Assumed MySQL Root Password: `mysql123`
 - Assumed MySQL Database Name: `journey`
 
