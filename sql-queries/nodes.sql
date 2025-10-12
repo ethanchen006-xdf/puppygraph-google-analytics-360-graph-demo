@@ -29,7 +29,7 @@ FROM (
         time AS hit_time_in_session,
         LEAD(time, 1) OVER (PARTITION BY fullVisitorId, visitId ORDER BY time) AS next_hit_time
     FROM
-        hit_data
+        sample_data
 ) AS subquery
 WHERE
     subquery.page_path IS NOT NULL
