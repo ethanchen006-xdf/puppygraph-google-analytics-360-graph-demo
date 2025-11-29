@@ -85,6 +85,13 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 ```
 
+# Grant user permissions
+```bash
+GRANT ALL PRIVILEGES ON journey.* TO 'mysqluser'@'%';
+FLUSH PRIVILEGES;
+exit
+```
+
 ---
 
 ## 3. Run Preparatory SQL Files (Derive Graph Tables)
@@ -111,6 +118,8 @@ docker exec -i mysql-server mysql -uroot -pmysql123 journey < ./sql-queries/edge
     * **Username:** `mysqluser`
     * **Password:** `mysqlpassword`
     * **JDBC Connection String:** `jdbc:mariadb://mysql:3306`
+    * **Driver Class:** com.mysql.cj.jdbc.Driver
+    * **URL for downloading driver:** https://mariadb.com/downloads/connectors/
     * Click **Save and Submit**.
 
 3.  **Add Nodes:**
