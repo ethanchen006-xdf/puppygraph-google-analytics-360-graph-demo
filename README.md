@@ -8,11 +8,9 @@
 - Assumed MySQL Database Name: `journey`
 
 ---
-
+## 1.  Launch Containers
+Launch PuppyGraph and MySQL container defined in docker-compose.yml
 ```bash
-# --- 1. Launch Containers ---
-
-# Launch PuppyGraph and MySQL container defined in docker-compose.yml
 docker compose up -d
 ```
 
