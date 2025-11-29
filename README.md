@@ -119,7 +119,7 @@ docker exec -i mysql-server mysql -uroot -pmysql123 journey < ./sql-queries/edge
     * **Password:** `mysqlpassword`
     * **JDBC Connection String:** `jdbc:mysql://mysql:3306/journey?allowPublicKeyRetrieval=true`
     * **Driver Class:** `com.mysql.cj.jdbc.Driver`
-    * **URL for downloading driver:** `[https://mariadb.com/downloads/connectors/](https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar)`
+    * **URL for downloading driver:** `https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar`
     * Click **Save and Submit**.
 
 3.  **Add Nodes:**
