@@ -1,9 +1,9 @@
 # PuppyGraph Demo GA360 Analytics
 
 ## Prerequisites
-- `~/docker-compose.yaml`
-- Data file at `~/data/sample_data.csv`
-- SQL files (`~/sql-queries/hit_tables.sql`, `~/sql-queries/nodes.sql`, `~/sql-queries/edges.sql`
+- `./docker-compose.yaml`
+- Data file at `./data/sample_data.csv`
+- SQL files (`./sql-queries/hit_tables.sql`, `./sql-queries/nodes.sql`, `./sql-queries/edges.sql`
 - Assumed MySQL Root Password: `mysql123`
 - Assumed MySQL Database Name: `journey`
 
@@ -22,7 +22,7 @@ docker compose up -d
 
  2a. Copy the CSV file to the MySQL container's secure directory
 ```bash
-docker cp ~/data/sample_data.csv mysql-server:/var/lib/mysql-files/sample_data.csv
+docker cp ./data/sample_data.csv mysql-server:/var/lib/mysql-files/sample_data.csv
 ```
 
  2b. Execute sql script to create database, table, and load data
@@ -90,9 +90,9 @@ IGNORE 1 ROWS;
 ## 3. Run Preparatory SQL Files (Derive Graph Tables)
 
 ```bash
-docker exec -i mysql-server mysql -uroot -pmysql123 journey < ~/sql-queries/hit_tables.sql
-docker exec -i mysql-server mysql -uroot -pmysql123 journey < ~/sql-queries/nodes.sql
-docker exec -i mysql-server mysql -uroot -pmysql123 journey < ~/sql-queries/edges.sql
+docker exec -i mysql-server mysql -uroot -pmysql123 journey < ./sql-queries/hit_tables.sql
+docker exec -i mysql-server mysql -uroot -pmysql123 journey < ./sql-queries/nodes.sql
+docker exec -i mysql-server mysql -uroot -pmysql123 journey < ./sql-queries/edges.sql
 
 ```
 
